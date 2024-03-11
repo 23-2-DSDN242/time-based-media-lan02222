@@ -61,24 +61,35 @@ function draw_clock(obj) {
 
   let hourHand = map (obj.hours, 0, 23, 0, 360)
 
-drawTriangles(50,50,20)
-}
-// push()
-// rotate(hourHand)
+push()
+for(let i = 0; i < 24; i++ ){
+  if( i == obj.hours){   
+    size = 40;
+  }
+  else{
+    size = 20
+  }
+
+  rotate(360 / 24)
 
 //   ellipse(0,-100,50)
+
+drawTriangles(0,-200,size)
 //   fill(0)
 //   ellipse(0,115,20)
 
-// pop()
+pop()
+}
 
+}
 
  
 
 function drawTriangles(x,y,s){
 fill(255)
   triangle(x,y,
-            x+s/2,y+s)
+            x+s/2,y+s,
+            x-s/2,y+s)
 
             triangle(x,y,
                x+s/2,y-s,
@@ -100,4 +111,4 @@ fill(255)
 
 
 
-}
+
