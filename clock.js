@@ -27,7 +27,10 @@ function draw_clock(obj) {
   // fill(175, 133, 255); // purple
   // ellipse(width / 3 * 2, 350, 150);
 
+  noStroke()
+  angleMode(DEGREES)
   ellipseMode (CENTER)
+  translate(width/2,height/2)
   background(20); //  beige
   fill(200);
 
@@ -42,15 +45,52 @@ function draw_clock(obj) {
   let color0f0rb = lerpColor(blue,purple,MinForLerp)
 
   let sizeStep = 15;
-  let howManyCircles = obj.seconds; //30
+  let howManyCircles = map (obj.seconds,0, 59, 20,40) //30
 
   //console.log(howManyCircles);
 
   fill(color0f0rb);
 
   for(let i = 0; i < howManyCircles; i++){
-  ellipse(width / 2, height /2,sizeStep*i);
+  ellipse(0, 0,sizeStep*i);
   }
+
+
+  fill("#Fae")
+  ellipse(0,0, 50);
+
+  let hourHand = map (obj.hours, 0, 23, 0, 360)
+
+drawTriangles(50,50,20)
+}
+// push()
+// rotate(hourHand)
+
+//   ellipse(0,-100,50)
+//   fill(0)
+//   ellipse(0,115,20)
+
+// pop()
+
+
+ 
+
+function drawTriangles(x,y,s){
+fill(255)
+  triangle(x,y,
+            x+s/2,y+s)
+
+            triangle(x,y,
+               x+s/2,y-s,
+               x-s/2,y-s)
+   }
+
+
+
+
+
+
+
 
 
 
