@@ -12,7 +12,7 @@ function preload(obj){
     Cat[0] = loadImage('assets/cat_walking_1.png');
     Cat[1] = loadImage('assets/cat_walking_2.png');
   
-    image(Cat[0], 200, 100);
+   
 }
 
 
@@ -30,13 +30,19 @@ function draw_clock() { //obj
   rect(0, 380, width, height/2); //ground
 
 
-
+  image(Cat[obj.seconds % 2], 200, 100);
+  console.log(obj.seconds % 2)
+  draw_tree(700,250)
+  draw_tree(500,250)
+ }
   
-
-    }
   
-  function draw_tree1(){
-  translate(700, 250);
+  
+  
+  
+    function draw_tree(x,y){
+      push()
+  translate(x, y);
 
   fill(100, 50, 60)
   rect(50, 95, 18, 35); //tree btton
@@ -48,6 +54,7 @@ function draw_clock() { //obj
 
   fill(100, 50, 120)
   triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3)  top one
+    pop()
     
 }
 
