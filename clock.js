@@ -32,8 +32,10 @@ function draw_clock() { //obj
 
   image(Cat[obj.seconds % 2], 200, 100);
   console.log(obj.seconds % 2)
-  draw_tree(700,250)
-  draw_tree(500,250)
+  
+  draw_tree(800,250)
+  draw_tree(600,250)
+  draw_tree(400,250)
  }
   
   
@@ -41,21 +43,22 @@ function draw_clock() { //obj
   
   
     function draw_tree(x,y){
+      let lightpurple = color(100, 50, 120)
+      let purple = color(100, 50, 60)
+      let darkpurple = color(50, 95, 18, 35)
       push()
   translate(x, y);
 
-  fill(100, 50, 60)
+  fill(darkpurple)
   rect(50, 95, 18, 35); //tree btton
   
-  fill(100, 50, 80)
+  fill(purple)
   triangle(30, 98, 58, 43, 86, 98); //tree middle
   
-
-
-  fill(100, 50, 120)
+  fill(lightpurple)
   triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3)  top one
     pop()
-    
+
 }
 
 
