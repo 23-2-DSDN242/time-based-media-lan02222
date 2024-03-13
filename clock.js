@@ -43,6 +43,7 @@ function draw_clock() { //obj
   
   
     function draw_tree(x,y){
+      // let treeColor
       let lightpurple = color(100, 50, 120)
       let purple = color(100, 50, 60)
       let darkpurple = color(50, 95, 18, 35)
@@ -59,9 +60,29 @@ function draw_clock() { //obj
   triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3)  top one
     pop()
 
+
+    
 }
 
 
+function draw_flower(){ //x1,y1
+push();
+  fill(230, 190, 230, 240);
+  translate(400, 400);
+  noStroke();
+  // rotate(radians(frameCount / 2));
+  for (var i = 0; i < 10; i++) {
+    if (frameCount <= 600) {
+      ellipse(0, 10 + frameCount / 20, 10 + frameCount / 40, 20 + frameCount / 20);
+    }
+    if (frameCount > 600) {
+      ellipse(0, 40, 25, 50);
+    }
+    rotate(PI / 5);
+  }
+  pop();
+
+}
   // // function draw_tree(x,y,s){
   //   fill(0)
   //     triangle(x,y,
