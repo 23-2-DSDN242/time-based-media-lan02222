@@ -30,8 +30,10 @@ function draw_clock() { //obj
   ellipse(width/2, height/1.5, 350); sun
  
   fill(100, 50, 150)
+  triangle(30, 98, 58, 43, 86, 98);
   triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3) 
 
+  rect(50, 95, 18, 35); //tree
 }
 
   // // function draw_tree(x,y,s){
