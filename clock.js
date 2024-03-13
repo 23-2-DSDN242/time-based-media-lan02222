@@ -1,7 +1,20 @@
 /*
  * use p5.js to draw a clock on a 960x500 canvas
  */
-function draw_clock(obj) {
+
+
+let numFrames = 2;
+var frame = 0;
+let Cat =  new Array(numFrames);
+
+function preload(){
+    Cat[0] = loadImage('assets/cat_walking_1.png');
+    Cat[1] = loadImage('assets/cat_walking_2.png');
+  
+}
+
+
+function draw_clock() { //obj
   background(255, 204, 0); //  morning time orange
   fill(200)
   noStroke()
@@ -9,10 +22,16 @@ function draw_clock(obj) {
 
   fill(255,0,0)
   ellipse(30, 30, 60, 60);
-
+  
 }
 
-  
+
+function draw_cat() {  //obj
+frame++;
+if (frame == numFrames) frame = 0;
+image(Cat[frame], 100, 100);
+
+} 
   
   
   
