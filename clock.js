@@ -7,12 +7,13 @@
 // var frame = 0;
 // let Cat =  new Array(numFrames);
 
-
-// function preload(){
-//     Cat[0] = loadImage('assets/cat_walking_1.png');
-//     Cat[1] = loadImage('assets/cat_walking_2.png');
+let Cat = []
+function preload(obj){
+    Cat[0] = loadImage('assets/cat_walking_1.png');
+    Cat[1] = loadImage('assets/cat_walking_2.png');
   
-// }
+    image(Cat[0], 200, 100);
+}
 
 
 function draw_clock() { //obj
@@ -21,20 +22,35 @@ function draw_clock() { //obj
  
 
   noStroke()
-  fill(200)
-  rect(0, 380, width, height/2); //ground， (move it in front of sun, did not show)
-
-
-
   fill(255,0,0)
-  ellipse(width/2, height/1.5, 350); sun
- 
-  fill(100, 50, 150)
-  triangle(30, 98, 58, 43, 86, 98);
-  triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3) 
+  ellipse(width/2, height/1.5, 350); //sun
 
-  rect(50, 95, 18, 35); //tree
+
+  fill(200)
+  rect(0, 380, width, height/2); //ground
+
+
+
+  
+
+    }
+  
+  function draw_tree1(){
+  translate(700, 250);
+
+  fill(100, 50, 60)
+  rect(50, 95, 18, 35); //tree btton
+  
+  fill(100, 50, 80)
+  triangle(30, 98, 58, 43, 86, 98); //tree middle
+  
+
+
+  fill(100, 50, 120)
+  triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3)  top one
+    
 }
+
 
   // // function draw_tree(x,y,s){
   //   fill(0)
