@@ -3,37 +3,67 @@
  */
 
 
-let numFrames = 2;
-var frame = 0;
-let Cat =  new Array(numFrames);
+// let numFrames = 2;  //not work
+// var frame = 0;
+// let Cat =  new Array(numFrames);
 
-function preload(){
-    Cat[0] = loadImage('assets/cat_walking_1.png');
-    Cat[1] = loadImage('assets/cat_walking_2.png');
+
+// function preload(){
+//     Cat[0] = loadImage('assets/cat_walking_1.png');
+//     Cat[1] = loadImage('assets/cat_walking_2.png');
   
-}
+// }
 
 
 function draw_clock() { //obj
-  background(255, 204, 0); //  morning time orange
-  fill(200)
+  background(255, 204, 0); //  morning light color
+  
+ 
+
   noStroke()
-  rect(0, 400, width, height/2); //ground
+  fill(200)
+  rect(0, 380, width, height/2); //ground， (move it in front of sun, did not show)
+
+
 
   fill(255,0,0)
-  ellipse(30, 30, 60, 60);
-  
+  ellipse(width/2, height/1.5, 350); sun
+ 
+  fill(100, 50, 150)
+  triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3) 
+
 }
 
+  // // function draw_tree(x,y,s){
+  //   fill(0)
+  //     triangle(x,y,
+  //               x+s/2,y+s,
+  //               x-s/2,y+s)
+    
+  //               triangle(x,y,
+  //                  x+s/2,y-s,
+  //                  x-s/2,y-s)
+  //                 //  rect(30, 20, 55, 55);
+  
+  // }
 
-function draw_cat() {  //obj
-frame++;
-if (frame == numFrames) frame = 0;
-image(Cat[frame], 100, 100);
+  
 
-} 
   
   
+// }
+
+
+// function draw_cat() {  //obj
+// frame++;
+// if (frame == numFrames) frame = 0;
+// image(Cat[frame], 100, 100);
+
+// } 
+  
+
+
+
   
   
   // draw your own clock here based on the values of obj:
