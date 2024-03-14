@@ -75,7 +75,7 @@ function draw_clock() { //obj
 }
 
 
-<<<<<<< HEAD
+
 // function draw_flower(x1,y1){ //x1,y1
 // // push();
 //   fill(100, 50, 120);
