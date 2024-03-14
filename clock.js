@@ -3,16 +3,15 @@
  */
 
 
-// let numFrames = 2;  //not work
-// var frame = 0;
-// let Cat =  new Array(numFrames);
 
 
-// function preload(){
-//     Cat[0] = loadImage('assets/cat_walking_1.png');
-//     Cat[1] = loadImage('assets/cat_walking_2.png');
+let Cat = []
+function preload(obj){
+    Cat[0] = loadImage('assets/cat_walking_1.png');
+    Cat[1] = loadImage('assets/cat_walking_2.png');
   
-// }
+   
+}
 
 
 function draw_clock() { //obj
@@ -21,33 +20,67 @@ function draw_clock() { //obj
  
 
   noStroke()
-  fill(200)
-  rect(0, 380, width, height/2); //ground， (move it in front of sun, did not show)
-
-
-
   fill(255,0,0)
-  ellipse(width/2, height/1.5, 350); sun
- 
-  fill(100, 50, 150)
-  triangle(30, 98, 58, 43, 86, 98);
-  triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3) 
+  ellipse(width/2, height/1.5, 350); //sun
 
-  rect(50, 95, 18, 35); //tree
+
+  fill(200)
+  rect(0, 380, width, height/2); //ground
+
+
+  image(Cat[obj.seconds % 2], 200, 100);
+  console.log(obj.seconds % 2)
+  
+  draw_tree(800,250)
+  draw_tree(600,250)
+  draw_tree(400,250)
+
+  draw_flower(100,250)
+
+   }
+  
+ 
+    function draw_tree(x,y){
+      // let treeColor
+      let lightpurple = color(100, 50, 120)
+      let purple = color(100, 50, 60)
+      let darkpurple = color(50, 95, 18, 35)
+      push()
+  translate(x, y);
+
+  fill(darkpurple)
+  rect(50, 95, 18, 35); //tree btton
+  
+  fill(purple)
+  triangle(30, 98, 58, 43, 86, 98); //tree middle
+  
+  fill(lightpurple)
+  triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3)  top one
+    pop()
+
+
+    
 }
 
-  // // function draw_tree(x,y,s){
-  //   fill(0)
-  //     triangle(x,y,
-  //               x+s/2,y+s,
-  //               x-s/2,y+s)
-    
-  //               triangle(x,y,
-  //                  x+s/2,y-s,
-  //                  x-s/2,y-s)
-  //                 //  rect(30, 20, 55, 55);
-  
-  // }
+
+// function draw_flower(x1,y1){ //x1,y1
+// // push();
+//   fill(100, 50, 120);
+//   translate(x1,y1);
+//   noStroke();
+//   rotate(radians(frameCount / 2));
+//   for (var i = 0; i < 10; i++) {
+//     if (frameCount <= 600) {
+//       ellipse(0, 10 + frameCount / 20, 10 + frameCount / 40, 20 + frameCount / 20);
+//     }
+//     if (frameCount > 600) {
+//       ellipse(0, 40, 25, 50);
+//     }
+//     rotate(PI / 5);
+//   }
+//   pop();
+
+// }
 
   
 
