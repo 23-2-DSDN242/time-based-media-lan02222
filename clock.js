@@ -4,10 +4,9 @@
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 4d29ca757455bf20b644fea817a23370a66ea4f3
+
+
 let Cat = []
 function preload(obj){
     Cat[0] = loadImage('assets/cat_walking_1.png');
@@ -37,21 +36,20 @@ function draw_clock() { //obj
   draw_tree(800,250)
   draw_tree(600,250)
   draw_tree(400,250)
-<<<<<<< HEAD
+
 
   draw_flower(100,250)
 
    }
   
  
-=======
- }
+
+
   
   
   
   
-  
->>>>>>> 4d29ca757455bf20b644fea817a23370a66ea4f3
+
     function draw_tree(x,y){
       // let treeColor
       let lightpurple = color(100, 50, 120)
@@ -76,25 +74,6 @@ function draw_clock() { //obj
 
 
 
-// function draw_flower(x1,y1){ //x1,y1
-// // push();
-//   fill(100, 50, 120);
-//   translate(x1,y1);
-//   noStroke();
-//   rotate(radians(frameCount / 2));
-//   for (var i = 0; i < 10; i++) {
-//     if (frameCount <= 600) {
-//       ellipse(0, 10 + frameCount / 20, 10 + frameCount / 40, 20 + frameCount / 20);
-//     }
-//     if (frameCount > 600) {
-//       ellipse(0, 40, 25, 50);
-//     }
-//     rotate(PI / 5);
-//   }
-//   pop();
-
-// }
-=======
 function draw_flower(){ //x1,y1
 push();
   fill(230, 190, 230, 240);
@@ -125,7 +104,7 @@ push();
   //                 //  rect(30, 20, 55, 55);
   
   // }
->>>>>>> 4d29ca757455bf20b644fea817a23370a66ea4f3
+
 
   
 
