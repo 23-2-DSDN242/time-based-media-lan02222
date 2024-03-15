@@ -16,13 +16,13 @@ function preload(obj){
 }
 
 
-function draw_clock() { //obj
-  background(255, 204, 0); //  morning light color
+function draw_clock(obj) { //obj
+  background(174, 214, 241); //  morning light color
   
- 
+  angleMode(RADIANS)
 
   noStroke()
-  fill(255,0,0)
+  fill(236, 112, 99)
   ellipse(width/2, height/1.5, 350); //sun
 
 
@@ -38,18 +38,16 @@ function draw_clock() { //obj
   draw_tree(400,250)
 
 
-  draw_flower(100,250)
-
+  // push()
+  // if (obj.seconds > 0) {
+  //    angle+=0.01;
+  //   }
+  draw_flower(100,320)
+  draw_flower(100,10)
+  // pop()
    }
   
  
-
-
-  
-  
-  
-  
-
     function draw_tree(x,y){
       // let treeColor
       let lightpurple = color(100, 50, 120)
@@ -74,24 +72,31 @@ function draw_clock() { //obj
 
 
 
-function draw_flower(){ //x1,y1
-push();
-  fill(230, 190, 230, 240);
-  translate(400, 400);
+function draw_flower(x,y){ //x1,y1
+  
+  let pink = color(255, 160, 122)
+  let yellow = color(249, 231, 159)
+  let minForLerp = map(obj.minutes, 0, 59, 0, 1)
+  let flowerColor = lerpColor(pink,yellow,minForLerp)
+  
+  fill(flowerColor);
+  translate(x, y);
   noStroke();
-  // rotate(radians(frameCount / 2));
-  for (var i = 0; i < 10; i++) {
-    if (frameCount <= 600) {
-      ellipse(0, 10 + frameCount / 20, 10 + frameCount / 40, 20 + frameCount / 20);
-    }
-    if (frameCount > 600) {
-      ellipse(0, 40, 25, 50);
-    }
+  for (let i = 0; i < 10; i++) {
+
+    ellipse(0, 30, 20, 35);
+   
+
     rotate(PI / 5);
   }
-  pop();
+    
 
 }
+
+
+
+
+
   // // function draw_tree(x,y,s){
   //   fill(0)
   //     triangle(x,y,
