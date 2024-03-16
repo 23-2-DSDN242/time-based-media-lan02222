@@ -22,32 +22,33 @@ function preload(obj){
 function draw_clock(obj) { //obj
 
   
-  background(174, 214, 241); //  morning light color
+  background(229, 242, 255); //  morning light color
   
   angleMode(RADIANS)
 
   noStroke()
+  
+//----------------------------------// sun, not used for the time being, make the loop bigger and change the color
+  
+// let OpacityAm = 35;
 
-  let OpacityAm = 35;
-  // fill(255,117,94, OpacityAm);
-
-  let orangered = color(249, 99, 81, OpacityAm)
-  let orange = color(255, 192, 99,  OpacityAm)
+  // let orangered = color(249, 99, 81, OpacityAm)
+  // let orange = color(255, 192, 99,  OpacityAm)
 
   
-  let MinForLerp = map(obj.hours, 0 , 59, 0,1)
-  let color0f0rb = lerpColor(orangered,orange,MinForLerp)
+  // let MinForLerp = map(obj.hours, 0 , 59, 0,1)
+  // let color0f0rb = lerpColor(orangered,orange,MinForLerp)
 
-  let sizeStep = 15;
-  let howManyCircles = map (obj.hours,0, 59, 20,40) //30
+  // let sizeStep = 15;
+  // let howManyCircles = map (obj.hours,0, 59, 20,40) //30
 
   //console.log(howManyCircles);
 
-  fill(color0f0rb);
+  // fill(color0f0rb);
 
-  for(let i = 0; i < howManyCircles; i++){
-  ellipse(width/2, height/1.5,sizeStep*i);// sun
-  }
+  // for(let i = 0; i < howManyCircles; i++){
+  // ellipse(width/2, height/1.5,sizeStep*i);// sun
+  // }
   //---------------------------------------------
   
   fill(120,164,139,255)//120,164,139,255
@@ -168,7 +169,8 @@ function draw_flower2(x,y,obj){
   fill(255, 255, 255,100)
   translate(x-obj.seconds*2, y);
   scale(0.55);
-  noStroke();
+  strokeWeight(10);
+  stroke(245, 183, 177, 30);
   let rotationAngle = map(obj.seconds % 59, 0, 59, 0, TWO_PI);  //Use obj to control flower spin
    rotate(rotationAngle);
   for (let i = 0; i < 10; i ++) {
