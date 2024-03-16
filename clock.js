@@ -11,7 +11,12 @@ let Cat = []
 function preload(obj){
     Cat[0] = loadImage('assets/cat_walking_1.png');
     Cat[1] = loadImage('assets/cat_walking_2.png');
-  
+   
+}
+
+let Grass;
+function preload(obj){
+    Grass = loadImage('assets/grass.png');
    
 }
 
@@ -22,47 +27,53 @@ function draw_clock(obj) { //obj
   angleMode(RADIANS)
 
   noStroke()
-  fill(236, 112, 99)
+  fill(255,117,94,200)
   ellipse(width/2, height/1.5, 350); //sun
 
 
-  fill(200)
+  fill(120,164,139,255)
   rect(0, 380, width, height/2); //ground
 
 
   image(Cat[obj.seconds % 2], 200, 100);
   console.log(obj.seconds % 2)
   
-  draw_tree(800,250)
-  draw_tree(600,250)
-  draw_tree(400,250)
 
 
-  // push()
-  // if (obj.seconds > 0) {
-  //    angle+=0.01;
-  //   }
-  draw_flower(100,320)
-  draw_flower(100,10)
-  // pop()
+  draw_tree(800,250,obj)
+  draw_tree(600,250,obj)
+  draw_tree(400,250,obj)
+
+  draw_stem(100,320,obj)
+  draw_stem(250,320,obj)
+  draw_stem(400,320,obj)
+
+  draw_flower(100,320,obj)
+  draw_flower(250,320,obj)
+  draw_flower(400,320,obj)
+
+  image(Grass, 0, 0);
+
+  
+
    }
   
  
-    function draw_tree(x,y){
+    function draw_tree(x,y,obj){
       // let treeColor
-      let lightpurple = color(100, 50, 120)
-      let purple = color(100, 50, 60)
-      let darkpurple = color(50, 95, 18, 35)
+      let topcolor = color(240,181,176,255)
+      let middlecolor = color(162,140,192)
+      let bottoncolor = color(164,106,162)
       push()
   translate(x, y);
 
-  fill(darkpurple)
-  rect(50, 95, 18, 35); //tree btton
+  fill(bottoncolor)
+  rect(50, 95, 18, 35); //tree botton
   
-  fill(purple)
+  fill(middlecolor)
   triangle(30, 98, 58, 43, 86, 98); //tree middle
   
-  fill(lightpurple)
+  fill(topcolor)
   triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3)  top one
     pop()
 
@@ -72,43 +83,62 @@ function draw_clock(obj) { //obj
 
 
 
-function draw_flower(x,y){ //x1,y1
+function draw_flower(x,y,obj){ 
   
-  let pink = color(255, 160, 122)
+  let pink = color(245, 183, 177)
   let yellow = color(249, 231, 159)
   let minForLerp = map(obj.minutes, 0, 59, 0, 1)
   let flowerColor = lerpColor(pink,yellow,minForLerp)
   
+  let HowsizeFlower = map (obj.seconds,0,59,4,20)
+
+  push()
   fill(flowerColor);
-  translate(x, y);
+  translate(x-obj.seconds*2, y);
   noStroke();
   for (let i = 0; i < 10; i++) {
-
-    ellipse(0, 30, 20, 35);
-   
-
-    rotate(PI / 5);
+    ellipse(0, 20, HowsizeFlower, HowsizeFlower+3); 
+    rotate(TWO_PI / 10);
   }
-    
+  fill(252, 243, 207);
+  ellipse(0, 0, HowsizeFlower+3);
+  pop()
+}
+  
+function draw_stem(x,y,obj) {
+  let stemColor = color(144,188,171,255); // Flower stem color
+  let stemWeight = map(obj.seconds/2, 0, 59, 0.5, 10);
 
+  push()
+  translate(x-obj.seconds*2, y);
+  stroke(stemColor);
+  strokeWeight(stemWeight);
+  line(0, 0, 0, 58);
+
+  pop()
 }
 
 
 
 
 
-  // // function draw_tree(x,y,s){
-  //   fill(0)
-  //     triangle(x,y,
-  //               x+s/2,y+s,
-  //               x-s/2,y+s)
-    
-  //               triangle(x,y,
-  //                  x+s/2,y-s,
-  //                  x-s/2,y-s)
-  //                 //  rect(30, 20, 55, 55);
+// function draw_frontgrass(x,y,obj) {
+
+//   push();
+//   translate(x,y);
+
+//   stroke(100, 200, 100);
+
+//   endShape();
+//   pop()
+// }
+
+
+
+
+
+
   
-  // }
 
 
   
