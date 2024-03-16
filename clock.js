@@ -8,20 +8,20 @@
 
 
 let Cat = []
+let Gress;
+
 function preload(obj){
     Cat[0] = loadImage('assets/cat_walking_1.png');
     Cat[1] = loadImage('assets/cat_walking_2.png');
    
-}
-
-let Grass;
-function preload(obj){
     Grass = loadImage('assets/grass.png');
    
-}    //can not work
+}   
 
 
 function draw_clock(obj) { //obj
+
+  
   background(174, 214, 241); //  morning light color
   
   angleMode(RADIANS)
@@ -35,9 +35,9 @@ function draw_clock(obj) { //obj
   rect(0, 380, width, height/2); //ground
 
 
-  draw_tree(800,250,obj)
-  draw_tree(600,250,obj)
-  draw_tree(400,250,obj)
+  draw_tree(800,120,obj)
+  draw_tree(600,120,obj)
+  draw_tree(400,120,obj)
 
   draw_stem(100,320,obj)
   draw_stem(250,320,obj)
@@ -53,21 +53,31 @@ function draw_clock(obj) { //obj
   image(Cat[obj.seconds % 2], 250, 300);
   console.log(obj.seconds % 2)
 
-  image(Grass, 0, 0); //can not work
-
   
+  let grassX = map(obj.seconds*2, 0, 59, 0, -Grass.width);
 
-   }
-  
+  // Draw grass
+  for (let i = 0; i < width / Grass.width + 2; i++) {
+    image(Grass, i * Grass.width + grassX, 410); //  grass position 
+  }
+}
  
-    function draw_tree(x,y,obj){
+  // image(Grass, -10, 410); 
+
+
+   
+// }
+ 
+    function draw_tree(x,y,s,obj){
       // let treeColor
+      
       let topcolor = color(240,181,176,255)
       let middlecolor = color(162,140,192)
       let bottoncolor = color(164,106,162)
       push()
   translate(x, y);
-
+  
+  scale(2);
   fill(bottoncolor)
   rect(50, 95, 18, 35); //tree botton
   
@@ -92,6 +102,7 @@ function draw_flower(x,y,obj){
   let flowerColor = lerpColor(pink,yellow,minForLerp)
   
   let HowsizeFlower = map (obj.seconds,0,59,4,20)
+  let HowsizePistil = map (obj.seconds,0,59,30,20)
 
   push()
   fill(flowerColor);
@@ -101,8 +112,10 @@ function draw_flower(x,y,obj){
     ellipse(0, 20, HowsizeFlower, HowsizeFlower+3); 
     rotate(TWO_PI / 10);
   }
+  strokeWeight(3);
+  stroke(255, 204, 0,35);
   fill(252, 243, 207);
-  ellipse(0, 0, HowsizeFlower+3);
+  ellipse(0, 0, HowsizePistil);
   pop()
 }
   
