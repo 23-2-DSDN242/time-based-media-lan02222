@@ -14,11 +14,11 @@ function preload(obj){
    
 }
 
-let Grass;
-function preload(obj){
-    Grass = loadImage('assets/grass.png');
+// let Grass;
+// function preload(obj){
+//     Grass = loadImage('assets/grass.png');
    
-}
+// }    //can not work
 
 
 function draw_clock(obj) { //obj
@@ -35,11 +35,6 @@ function draw_clock(obj) { //obj
   rect(0, 380, width, height/2); //ground
 
 
-  image(Cat[obj.seconds % 2], 200, 100);
-  console.log(obj.seconds % 2)
-  
-
-
   draw_tree(800,250,obj)
   draw_tree(600,250,obj)
   draw_tree(400,250,obj)
@@ -52,9 +47,10 @@ function draw_clock(obj) { //obj
   draw_flower(250,320,obj)
   draw_flower(400,320,obj)
 
-  image(Grass, 0, 0);
+  // image(Grass, 0, 0); //can not work
 
-  
+  image(Cat[obj.seconds % 2], 250, 300);
+  console.log(obj.seconds % 2)
 
    }
   
