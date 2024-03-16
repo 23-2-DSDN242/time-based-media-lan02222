@@ -27,11 +27,30 @@ function draw_clock(obj) { //obj
   angleMode(RADIANS)
 
   noStroke()
-  fill(255,117,94,200)
-  ellipse(width/2, height/1.5, 350); //sun
 
+  let OpacityAm = 35;
+  // fill(255,117,94, OpacityAm);
 
-  fill(120,164,139,255)
+  let orangered = color(249, 99, 81, OpacityAm)
+  let orange = color(255, 192, 99,  OpacityAm)
+
+  
+  let MinForLerp = map(obj.hours, 0 , 59, 0,1)
+  let color0f0rb = lerpColor(orangered,orange,MinForLerp)
+
+  let sizeStep = 15;
+  let howManyCircles = map (obj.hours,0, 59, 20,40) //30
+
+  //console.log(howManyCircles);
+
+  fill(color0f0rb);
+
+  for(let i = 0; i < howManyCircles; i++){
+  ellipse(width/2, height/1.5,sizeStep*i);// sun
+  }
+  //---------------------------------------------
+  
+  fill(120,164,139,255)//120,164,139,255
   rect(0, 380, width, height/2); //ground
 
 
@@ -40,20 +59,28 @@ function draw_clock(obj) { //obj
   draw_tree(400,120,obj)
 
   draw_stem(100,320,obj)
-  draw_stem(250,320,obj)
-  draw_stem(400,320,obj)
+  draw_stem(350,320,obj)
+  draw_stem(600,320,obj)
+  draw_stem(230,320,obj)
+  draw_stem(480,320,obj)
+  draw_stem(730,320,obj)
+  draw_stem(850,320,obj)
 
   draw_flower(100,320,obj)
-  draw_flower(250,320,obj)
-  draw_flower(400,320,obj)
+  draw_flower(350,320,obj)
+  draw_flower(600,320,obj)
+  draw_flower(850,320,obj)
 
- 
- 
+  draw_flower2(230,320,obj)
+  draw_flower2(480,320,obj)
+  draw_flower2(730,320,obj)
 
-  image(Cat[obj.seconds % 2], 250, 300);
+
+  image(Cat[obj.seconds % 2], 250, 300); //cat walking speed
   console.log(obj.seconds % 2)
 
   
+
   let grassX = map(obj.seconds*2, 0, 59, 0, -Grass.width);
 
   // Draw grass
@@ -117,11 +144,15 @@ function draw_flower(x,y,obj){
   fill(252, 243, 207);
   ellipse(0, 0, HowsizePistil);
   pop()
+
+  
 }
   
+
+
 function draw_stem(x,y,obj) {
   let stemColor = color(144,188,171,255); // Flower stem color
-  let stemWeight = map(obj.seconds/2, 0, 59, 0.5, 10);
+  let stemWeight = map(obj.seconds/2, 0, 59, 0.5, 10); //contral stemWeight
 
   push()
   translate(x-obj.seconds*2, y);
@@ -132,7 +163,20 @@ function draw_stem(x,y,obj) {
   pop()
 }
 
-
+function draw_flower2(x,y,obj){ 
+  push()
+  fill(255, 255, 255,100)
+  translate(x-obj.seconds*2, y);
+  scale(0.55);
+  noStroke();
+  let rotationAngle = map(obj.seconds % 59, 0, 59, 0, TWO_PI);  //Use obj to control flower spin
+   rotate(rotationAngle);
+  for (let i = 0; i < 10; i ++) {
+    ellipse(0, 30, 20, 80);
+    rotate(PI/5);
+  }
+  pop()
+}
 
 
 
