@@ -21,7 +21,7 @@ function preload(){
 
 function draw_clock(obj) { //obj
 
-  if(obj.hours <= 6 || obj.hours > 20 ) {  //The background is bright before 19 o'clock and dark after 19 o'clock
+  if(obj.hours >= 6 || obj.hours < 20 ) {  //The background is bright before 19 o'clock and dark after 19 o'clock
 
   background(255); 
   let myStrokeWeight = 50;
@@ -43,28 +43,7 @@ function draw_clock(obj) { //obj
   angleMode(RADIANS)
   noStroke()
 
-//----------------------------------// sun, not used for the time being, make the loop bigger and change the color
-  
-// let OpacityAm = 35;
 
-  // let orangered = color(249, 99, 81, OpacityAm)
-  // let orange = color(255, 192, 99,  OpacityAm)
-
-  
-  // let MinForLerp = map(obj.hours, 0 , 59, 0,1)
-  // let color0f0rb = lerpColor(orangered,orange,MinForLerp)
-
-  // let sizeStep = 15;
-  // let howManyCircles = map (obj.hours,0, 59, 20,40) //30
-
-  //console.log(howManyCircles);
-
-  // fill(color0f0rb);
-
-  // for(let i = 0; i < howManyCircles; i++){
-  // ellipse(width/2, height/1.5,sizeStep*i);// sun
-  // }
-  //---------------------------------------------
   
   fill(120,164,139,255)//120,164,139,255
   rect(0, 380, width, height/2); //ground
@@ -89,27 +68,27 @@ function draw_clock(obj) { //obj
   draw_flower(x+400,y+200,obj)
   draw_flower(x+650,y+200,obj)
 
-  draw_flower2(230,320,obj)
-  draw_flower2(480,320,obj)
-  draw_flower2(730,320,obj)
+  draw_flower2(x+30,x+120,obj)
+  draw_flower2(x+280,x+120,obj)
+  draw_flower2(x+530,x+120,obj)
   
   
   
 
 let clockHour = obj.hours
 for (let i = 0; i < 12; i++) {   //loop 
-  let heartX = 600 - i * 30;    //600 is the starting position, and then each distance is 30
+  let heartX = 600 - i * 30;    //start position 600, then each distance is 30
   let Opacity = 30  
 
   let c;
 
   if (clockHour > i*2) {
-    c = color(243, 78, 119, Opacity);  // If the current time is greater than the set time, the transparency of the heart changes
+    c = color(243, 78, 119, Opacity);  // if the current time is greater than the set time, the transparency of the heart changes
   } 
   else {
-  c = color(251, 83, 123);//
+  c = color(251, 83, 123); // the hearts is normal color
   }
-  draw_heart(heartX, -230, obj,c); //Let the 12 hearts of the cycle be arranged according to the spacing on the x-axis
+  draw_heart(heartX, -230, obj,c); //contral the 12 hearts positon,color
 }
 
 
@@ -128,31 +107,51 @@ for (let i = 0; i < 12; i++) {   //loop
   
   if(obj.seconds_until_alarm < 0){
 
-  // draw_cloud(150, 100,obj)
-  fill(235, 247, 247.50)
-  ellipse(30, 10, 75, 50);
-  ellipse(40, 20, 75, 50);
-  ellipse(10, 20, 75, 50);
+  draw_cloud(150, 100,obj)
+  // fill(235, 247, 247.50)
+  // ellipse(30, 10, 75, 50);
+  // ellipse(40, 20, 75, 50);
+  // ellipse(10, 20, 75, 50);
   }
 
-  else if(obj.seconds_until_alarm > 0){
+  else if(obj.seconds_until_alarm > 0){ // this is when the alarm is counting down 
+   
+    if(obj.millis < 999/2){
+      sizeStep = 20;
+      }
+      else{
+        sizeStep = 20*obj.seconds%30;
+      }
+    let sunColor = color(249, 99, 81, 35);
 
-    // for(let i = 0; i <= obj.seconds%3; i++){
-    //   fill(235, 247, 247.50)
-    // draw_cloud(150*i, 100,obj)
-    // }
+    let howManyCircles = map (obj.seconds,0, 59, 20,40) //30
+
+    // console.log(howManyCircles);
+
+    fill(sunColor);
+
+      for(let i = 0; i < howManyCircles; i++){
+    ellipse(90, 90,sizeStep*i);// sun
+    }
+ 
+
     
-    fill(235, 247, 247.50)
-    ellipse(30, 10, obj.seconds%3*100+75);//75, 50
-    ellipse(40, 20, obj.seconds%3*100+75, obj.seconds%3*100+50);
-    ellipse(10, 20, obj.seconds%3*100+75, obj.seconds%3*100+50);
 }
-  else{
-      // for(let i = 0; i <= obj.seconds%3; i++){
-      // draw_cloud(150*i, 100,obj)
-  // }
-} 
-  // image(Grass, -10, 410); 
+  else{ // this will happen when obj.seconds_until_alarm  = 0 
+    
+    background(249, 99, 81, 150);
+    fill(255); // white
+    
+    textSize(80)
+    text(":", width/2-50, height/2-100)
+    text(obj.hours, width/2-200, height/2-100)
+    text(obj.minutes, width/2+100,height/2-100)
+    
+    textSize(38)
+    text("People are learning the meaning of time every day", 30, height/2 )
+  
+  }
+   
 }
 
    
@@ -186,7 +185,7 @@ for (let i = 0; i < 12; i++) {   //loop
 
 
 
-function draw_flower(x,y,obj){ 
+function draw_flower(x,y,obj){  //draw the flower,
   
   let pink = color(245, 183, 177)
   let yellow = color(249, 231, 159)
@@ -194,20 +193,20 @@ function draw_flower(x,y,obj){
   let flowerColor = lerpColor(pink,yellow,minForLerp)
   
   let HowsizeFlower = map (obj.seconds,0,59,4,20)
-  let HowsizePistil = map (obj.seconds,0,59,30,20)
+  let HowsizeFlowerCore = map (obj.seconds,0,59,30,20)
 
   push()
-  fill(flowerColor);
-  translate(x-obj.seconds*2, y);
+  fill(flowerColor); //Flower color changes with minutes
+  translate(x-obj.seconds*2, y); //flower position changes with seconds
   noStroke();
   for (let i = 0; i < 10; i++) {
-    ellipse(0, 20, HowsizeFlower, HowsizeFlower+3); 
+    ellipse(0, 20, HowsizeFlower, HowsizeFlower+3); //Flower size changes with seconds
     rotate(TWO_PI / 10);
   }
   strokeWeight(3);
   stroke(255, 204, 0,35);
   fill(252, 243, 207);
-  ellipse(0, 0, HowsizePistil);
+  ellipse(0, 0, HowsizeFlowerCore); //FlowerCore size changes with seconds
   pop()
 
   
@@ -217,10 +216,10 @@ function draw_flower(x,y,obj){
 
 function draw_stem(x,y,obj) {
   let stemColor = color(144,188,171,255); // Flower stem color
-  let stemWeight = map(obj.seconds/2, 0, 59, 0.5, 10); //contral stemWeight
+  let stemWeight = map(obj.seconds/2, 0, 59, 0.5, 10); //contral stemWeight changes with seconds
 
   push()
-  translate(x-obj.seconds*2, y);
+  translate(x-obj.seconds*2, y); //stem position changes with seconds
   stroke(stemColor);
   strokeWeight(stemWeight);
   line(0, 0, 0, 58);
@@ -228,14 +227,14 @@ function draw_stem(x,y,obj) {
   pop()
 }
 
-function draw_flower2(x,y,obj){ 
+function draw_flower2(x,y,obj){ //The petals of another flower rotate according to seconds
   push()
   fill(255, 255, 255,100)
   translate(x-obj.seconds*2, y);
   scale(0.55);
   strokeWeight(10);
   stroke(245, 183, 177, 30);
-  let rotationAngle = map(obj.seconds % 59, 0, 59, 0, TWO_PI);  //Use obj to control flower spin
+  let rotationAngle = map(obj.seconds % 59, 0, 59, 0, TWO_PI);  //use map to contral the angle change
    rotate(rotationAngle);
   for (let i = 0; i < 10; i ++) {
     ellipse(0, 30, 20, 80);
@@ -246,7 +245,7 @@ function draw_flower2(x,y,obj){
 
 
 
-function draw_heart(x,y,obj,c){ 
+function draw_heart(x,y,obj,c){ //use bezierVertex to draw a heart
 
   let VertexX =200;
   let VertexY =200;
@@ -268,16 +267,16 @@ function draw_heart(x,y,obj,c){
   
 }
 
-// function draw_cloud(x, y,obj) {
-//   push()
-//   translate(x, y);
-//   fill(250)
-//   noStroke();
-//   ellipse(30, 10, 75, 50);
-//   ellipse(40, 20, 75, 50);
-//   ellipse(10, 20, 75, 50);
-//   pop()
-// }
+function draw_cloud(x, y,obj) { //use 3 ellipses to draw a cloud
+  push()
+  translate(x, y);
+  fill(250)
+  noStroke();
+  ellipse(30, 10, 75, 50);
+  ellipse(40, 20, 75, 50);
+  ellipse(10, 20, 75, 50);
+  pop()
+}
 
 
 
@@ -289,117 +288,6 @@ function draw_heart(x,y,obj,c){
 
   
   
-// }
-
-
-// function draw_cat() {  //obj
-// frame++;
-// if (frame == numFrames) frame = 0;
-// image(Cat[frame], 100, 100);
-
-// } 
-  
-
-
-
-  
-  
-  // draw your own clock here based on the values of obj:
-  //    obj.hours goes from 0-23
-  //    obj.minutes goes from 0-59
-  //    obj.seconds goes from 0-59
-  //    obj.millis goes from 0-999
-  //    obj.seconds_until_alarm is:
-  //        < 0 if no alarm is set
-  //        = 0 if the alarm is currently going off
-  //        > 0 --> the number of seconds until alarm should go off
-
-  // --------------------------
-  // background(50); //  beige
-  // fill(200); // dark grey
-  // textSize(40);
-  // textAlign(CENTER, CENTER);
-  // text("YOUR MAIN CLOCK CODE GOES HERE", width / 2, 200);
-
-
-  // fill(249, 140, 255);// pink
-  // ellipse(width / 3, 350, 150);
-  // fill(140, 255, 251) // blue
-  // ellipse(width / 2, 350, 150);
-  // fill(175, 133, 255); // purple
-  // ellipse(width / 3 * 2, 350, 150);
-
-// -------------------------------------------- week 2 (4)
-//   noStroke()
-//   angleMode(DEGREES)
-//   ellipseMode (CENTER)
-//   translate(width/2,height/2)
-//   background(20); //  beige
-//   fill(200);
-
-//   let OpacityAm = 35;
-//   // fill(249,140,255, OpacityAm);
-
-//   let blue = color(140, 255, 251,OpacityAm)
-//   let purple = color(175, 133, 255,OpacityAm)
-
-  
-//   let MinForLerp = map(obj.minutes, 0 , 59, 0,1)
-//   let color0f0rb = lerpColor(blue,purple,MinForLerp)
-
-//   let sizeStep = 15;
-//   let howManyCircles = map (obj.seconds,0, 59, 20,40) //30
-
-//   //console.log(howManyCircles);
-
-//   fill(color0f0rb);
-
-//   for(let i = 0; i < howManyCircles; i++){
-//   ellipse(0, 0,sizeStep*i);
-//   }
-
-
-//   fill("#Fae")
-//   ellipse(0,0, 50);
-
-//   let hourHand = map (obj.hours, 0, 23, 0, 360)
-
-// push()
-// for(let i = 0; i < 24; i++ ){
-//   if( i == obj.hours){   
-//     size = 40;
-//   }
-//   else{
-//     size = 20
-//   }
-
-//   rotate(360 / 24)
-
-// //   ellipse(0,-100,50)
-
-// drawTriangles(0,-200,size)
-
-// //   fill(0)
-// //   ellipse(0,115,20)
-
-// pop()
-// }
-
-// }
-
- 
-
-// function drawTriangles(x,y,s){
-// fill(255)
-//   triangle(x,y,
-//             x+s/2,y+s,
-//             x-s/2,y+s)
-
-//             triangle(x,y,
-//                x+s/2,y-s,
-//                x-s/2,y-s)
-//    }
-
 
 
 
