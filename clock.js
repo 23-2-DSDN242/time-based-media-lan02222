@@ -7,12 +7,12 @@
 
 
 
-let Cat = []
+let Seagull = []
 let Gress;
 
-function preload(obj){
-  Cat[0] = loadImage('assets/cat_walking_1.png');
-  Cat[1] = loadImage('assets/cat_walking_2.png');
+function preload(){
+  Seagull[0] = loadImage('assets/seagull_1.png');
+  Seagull[1] = loadImage('assets/seagull_2.png');
    
   Grass = loadImage('assets/grass.png');
    
@@ -21,11 +21,26 @@ function preload(obj){
 
 function draw_clock(obj) { //obj
 
-  
-  background(229, 242, 255); //  morning light color
-  
-  angleMode(RADIANS)
+  if(obj.hours <= 6 || obj.hours > 20 ) {  //The background is bright before 19 o'clock and dark after 19 o'clock
 
+  background(255); 
+  let myStrokeWeight = 50;
+  strokeWeight(myStrokeWeight)
+  let lightblue = color(232, 253, 252) 
+  let blue = color(70, 215, 249)
+
+  for(let i = 0; i < width; i = i + myStrokeWeight ){
+    let lerpMap = map(i, 0,width,0,1)
+    let gradientColor = lerpColor(blue,lightblue,lerpMap) // ligtbule color gradient to blue color 
+    stroke(gradientColor);
+    line(i,0, i,height)
+    
+  }
+} else {
+  background(7, 34, 78); //dark blue
+}
+
+  angleMode(RADIANS)
   noStroke()
 
 //----------------------------------// sun, not used for the time being, make the loop bigger and change the color
@@ -54,49 +69,41 @@ function draw_clock(obj) { //obj
   fill(120,164,139,255)//120,164,139,255
   rect(0, 380, width, height/2); //ground
 
+  let x=200;
+  let y=120;
+  
+  draw_tree(x+500,y,2,obj)
+  draw_tree(x+300,y,2,obj)
+  draw_tree(x+100,y,2,obj)
 
-  draw_tree(800,120,obj)
-  draw_tree(600,120,obj)
-  draw_tree(400,120,obj)
+  draw_stem(x-100,y+200,obj)
+  draw_stem(x+150,y+200,obj)
+  draw_stem(x+400,y+200,obj)
+  draw_stem(x+30,y+200,obj)
+  draw_stem(x+280,y+200,obj)
+  draw_stem(x+530,y+200,obj)
+  draw_stem(x+650,y+200,obj)
 
-  draw_stem(100,320,obj)
-  draw_stem(350,320,obj)
-  draw_stem(600,320,obj)
-  draw_stem(230,320,obj)
-  draw_stem(480,320,obj)
-  draw_stem(730,320,obj)
-  draw_stem(850,320,obj)
-
-  draw_flower(100,320,obj)
-  draw_flower(350,320,obj)
-  draw_flower(600,320,obj)
-  draw_flower(850,320,obj)
+  draw_flower(x-100,y+200,obj)
+  draw_flower(x+150,y+200,obj)
+  draw_flower(x+400,y+200,obj)
+  draw_flower(x+650,y+200,obj)
 
   draw_flower2(230,320,obj)
   draw_flower2(480,320,obj)
   draw_flower2(730,320,obj)
   
+  
+  
 
-// Arrange 12 heart shapes
-// draw_heart(600, -230, obj)
-// draw_heart(570, -230, obj)
-// draw_heart(540, -230, obj)
-// draw_heart(510, -230, obj)
-// draw_heart(480, -230, obj)
-// draw_heart(450, -230, obj)
-// draw_heart(420, -230, obj)
-// draw_heart(390, -230, obj)
-// draw_heart(360, -230, obj)
-// draw_heart(330, -230, obj)
-// draw_heart(300, -230, obj)
-// draw_heart(270, -230, obj)
+let clockHour = obj.hours
 for (let i = 0; i < 12; i++) {   //loop 
   let heartX = 600 - i * 30;    //600 is the starting position, and then each distance is 30
   let Opacity = 30  
 
   let c;
 
-  if (obj.hours > i*2) {
+  if (clockHour > i*2) {
     c = color(243, 78, 119, Opacity);  // If the current time is greater than the set time, the transparency of the heart changes
   } 
   else {
@@ -106,7 +113,7 @@ for (let i = 0; i < 12; i++) {   //loop
 }
 
 
-  image(Cat[obj.seconds % 2], 250, 300); //cat walking speed
+  image(Seagull[obj.seconds % 2], 250, 290); //cat walking speed
   console.log(obj.seconds % 2)
 
   
@@ -117,10 +124,43 @@ for (let i = 0; i < 12; i++) {   //loop
   for (let i = 0; i < width / Grass.width + 2; i++) {
     image(Grass, i * Grass.width + grassX, 410); //  grass position 
   }
-}
- 
-  // image(Grass, -10, 410); 
+  
+  
+  if(obj.seconds_until_alarm < 0){
+    if (obj.hours < 1){
+      clockHour = 12;  // no zero allowed
+    }
+  
+    if (obj.hours > 12){ //never over 12
+      clockHour = obj.hours - 12;
+    }
+  draw_cloud(150, 100,obj)
+  }
 
+  else if(obj.seconds_until_alarm > 0){
+    if (obj.hours < 1){
+      clockHour = 12;  // no zero allowed
+    }
+    if (obj.hours > 12){ //never over 12
+      clockHour = obj.hours - 12;}
+
+    for(let i = 0; i <= obj.seconds%3; i++){
+      draw_cloud(150*i, 100,obj)
+    }
+}
+  else{
+    if (obj.hours < 1){
+      clockHour = 12;  // no zero allowed
+    }
+    if (obj.hours > 12){ //never over 12
+      clockHour = obj.hours - 12;}
+      
+      for(let i = 0; i <= obj.seconds%3; i++){
+      draw_cloud(150*i, 100,obj)
+  }
+} 
+  // image(Grass, -10, 410); 
+}
 
    
 
@@ -128,13 +168,15 @@ for (let i = 0; i < 12; i++) {   //loop
   function draw_tree(x,y,s,obj){
       // let treeColor
       
-      let topcolor = color(240,181,176,255)
-      let middlecolor = color(162,140,192)
-      let bottoncolor = color(164,106,162)
-      push()
-    translate(x, y);
+    let topcolor = color(240,181,176,255)
+    let middlecolor = color(162,140,192)
+    let bottoncolor = color(164,106,162)
+    push()
+    translate(x+obj.seconds*2, y);
   
-    scale(2);
+    scale(s);
+
+    
     fill(bottoncolor)
     rect(50, 95, 18, 35); //tree botton
   
@@ -233,9 +275,16 @@ function draw_heart(x,y,obj,c){
   
 }
 
-
-
-
+function draw_cloud(x, y,obj) {
+  push()
+  translate(x, y);
+  fill(250)
+  noStroke();
+  ellipse(30, 10, 75, 50);
+  ellipse(40, 20, 75, 50);
+  ellipse(10, 20, 75, 50);
+  pop()
+}
 
 
 
