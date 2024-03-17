@@ -11,10 +11,10 @@ let Cat = []
 let Gress;
 
 function preload(obj){
-    Cat[0] = loadImage('assets/cat_walking_1.png');
-    Cat[1] = loadImage('assets/cat_walking_2.png');
+  Cat[0] = loadImage('assets/cat_walking_1.png');
+  Cat[1] = loadImage('assets/cat_walking_2.png');
    
-    Grass = loadImage('assets/grass.png');
+  Grass = loadImage('assets/grass.png');
    
 }   
 
@@ -27,7 +27,7 @@ function draw_clock(obj) { //obj
   angleMode(RADIANS)
 
   noStroke()
-  
+
 //----------------------------------// sun, not used for the time being, make the loop bigger and change the color
   
 // let OpacityAm = 35;
@@ -75,6 +75,35 @@ function draw_clock(obj) { //obj
   draw_flower2(230,320,obj)
   draw_flower2(480,320,obj)
   draw_flower2(730,320,obj)
+  
+
+// Arrange 12 heart shapes
+// draw_heart(600, -230, obj)
+// draw_heart(570, -230, obj)
+// draw_heart(540, -230, obj)
+// draw_heart(510, -230, obj)
+// draw_heart(480, -230, obj)
+// draw_heart(450, -230, obj)
+// draw_heart(420, -230, obj)
+// draw_heart(390, -230, obj)
+// draw_heart(360, -230, obj)
+// draw_heart(330, -230, obj)
+// draw_heart(300, -230, obj)
+// draw_heart(270, -230, obj)
+for (let i = 0; i < 12; i++) {   //loop 
+  let heartX = 600 - i * 30;    //600 is the starting position, and then each distance is 30
+  let Opacity = 30  
+
+  let c;
+
+  if (obj.hours > i*2) {
+    c = color(243, 78, 119, Opacity);  // If the current time is greater than the set time, the transparency of the heart changes
+  } 
+  else {
+  c = color(251, 83, 123);//
+  }
+  draw_heart(heartX, -230, obj,c); //Let the 12 hearts of the cycle be arranged according to the spacing on the x-axis
+}
 
 
   image(Cat[obj.seconds % 2], 250, 300); //cat walking speed
@@ -94,26 +123,26 @@ function draw_clock(obj) { //obj
 
 
    
-// }
+
  
-    function draw_tree(x,y,s,obj){
+  function draw_tree(x,y,s,obj){
       // let treeColor
       
       let topcolor = color(240,181,176,255)
       let middlecolor = color(162,140,192)
       let bottoncolor = color(164,106,162)
       push()
-  translate(x, y);
+    translate(x, y);
   
-  scale(2);
-  fill(bottoncolor)
-  rect(50, 95, 18, 35); //tree botton
+    scale(2);
+    fill(bottoncolor)
+    rect(50, 95, 18, 35); //tree botton
   
-  fill(middlecolor)
-  triangle(30, 98, 58, 43, 86, 98); //tree middle
+    fill(middlecolor)
+    triangle(30, 98, 58, 43, 86, 98); //tree middle
   
-  fill(topcolor)
-  triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3)  top one
+    fill(topcolor)
+    triangle(30, 75, 58, 20, 86, 75); //(x1, y1, x2, y2, x3, y3)  top one
     pop()
 
 
@@ -182,16 +211,29 @@ function draw_flower2(x,y,obj){
 
 
 
-// function draw_frontgrass(x,y,obj) {
+function draw_heart(x,y,obj,c){ 
 
-//   push();
-//   translate(x,y);
+  let VertexX =200;
+  let VertexY =200;
+  
+  push()
+  translate(x, y);
 
-//   stroke(100, 200, 100);
+  fill(c); 
+  noStroke(); 
+  scale(1.5);
 
-//   endShape();
-//   pop()
-// }
+  beginShape();
+  vertex(200, 200);
+  bezierVertex(VertexX-5, VertexY-5, VertexX-10, VertexY+3.3, VertexX, VertexY+10); //(195, 195, 190, 203.3, 200, 210)
+  bezierVertex(VertexX+10, VertexY+3.3, VertexX+5, 195, VertexX, VertexY); //(210, 203.3, 205, 195, 200, 200)
+  endShape(CLOSE);
+
+  pop()
+  
+}
+
+
 
 
 
