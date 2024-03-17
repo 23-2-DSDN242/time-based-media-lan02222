@@ -2,7 +2,4 @@
 
 ### THIS IS YOUR README
 
-I added a picture of grass to the foreground and tried to use the loop function to make it move. Finally, width / Grass.width is used to calculate the width of how many pieces of grass the canvas width can accommodate, so that there will be no blank space next to the grass when the grass is cycled.
-More, I added another kind of flower and used the map function to control the rotation of the flower so that it rotates according to seconds.
-Currently, all flowers and stems change nicely over time.
-At the same time, I set up a larger loop and color for the sun using what I taught in class. At the same time, I tried many colors of the sun, but the colors in the picture were never very harmonious. So I finally decided to remove the sun from the painting for now.
+I drew 12 hearts to represent people's energy throughout the day. 12 corresponds to 24 hours in a day. Every morning is the time when people have the highest energy, and then energy decreases as time goes by. I used if to set it up. Every 2 hours starting in the morning, the color of a heart will become lighter, which represents the loss of energy.
