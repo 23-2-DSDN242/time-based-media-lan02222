@@ -127,37 +127,30 @@ for (let i = 0; i < 12; i++) {   //loop
   
   
   if(obj.seconds_until_alarm < 0){
-    if (obj.hours < 1){
-      clockHour = 12;  // no zero allowed
-    }
-  
-    if (obj.hours > 12){ //never over 12
-      clockHour = obj.hours - 12;
-    }
-  draw_cloud(150, 100,obj)
+
+  // draw_cloud(150, 100,obj)
+  fill(235, 247, 247.50)
+  ellipse(30, 10, 75, 50);
+  ellipse(40, 20, 75, 50);
+  ellipse(10, 20, 75, 50);
   }
 
   else if(obj.seconds_until_alarm > 0){
-    if (obj.hours < 1){
-      clockHour = 12;  // no zero allowed
-    }
-    if (obj.hours > 12){ //never over 12
-      clockHour = obj.hours - 12;}
 
-    for(let i = 0; i <= obj.seconds%3; i++){
-      draw_cloud(150*i, 100,obj)
-    }
+    // for(let i = 0; i <= obj.seconds%3; i++){
+    //   fill(235, 247, 247.50)
+    // draw_cloud(150*i, 100,obj)
+    // }
+    
+    fill(235, 247, 247.50)
+    ellipse(30, 10, obj.seconds%3*100+75);//75, 50
+    ellipse(40, 20, obj.seconds%3*100+75, obj.seconds%3*100+50);
+    ellipse(10, 20, obj.seconds%3*100+75, obj.seconds%3*100+50);
 }
   else{
-    if (obj.hours < 1){
-      clockHour = 12;  // no zero allowed
-    }
-    if (obj.hours > 12){ //never over 12
-      clockHour = obj.hours - 12;}
-      
-      for(let i = 0; i <= obj.seconds%3; i++){
-      draw_cloud(150*i, 100,obj)
-  }
+      // for(let i = 0; i <= obj.seconds%3; i++){
+      // draw_cloud(150*i, 100,obj)
+  // }
 } 
   // image(Grass, -10, 410); 
 }
@@ -275,16 +268,16 @@ function draw_heart(x,y,obj,c){
   
 }
 
-function draw_cloud(x, y,obj) {
-  push()
-  translate(x, y);
-  fill(250)
-  noStroke();
-  ellipse(30, 10, 75, 50);
-  ellipse(40, 20, 75, 50);
-  ellipse(10, 20, 75, 50);
-  pop()
-}
+// function draw_cloud(x, y,obj) {
+//   push()
+//   translate(x, y);
+//   fill(250)
+//   noStroke();
+//   ellipse(30, 10, 75, 50);
+//   ellipse(40, 20, 75, 50);
+//   ellipse(10, 20, 75, 50);
+//   pop()
+// }
 
 
 
