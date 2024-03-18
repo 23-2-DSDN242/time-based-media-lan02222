@@ -148,7 +148,7 @@ for (let i = 0; i < 12; i++) {   //loop
     text(obj.minutes, width/2+100,height/2-100)
     
     textSize(38)
-    text("People are learning the meaning of time every day", 30, height/2 )
+    text("Every day people are learning the meaning of time", 30, height/2 )
   
   }
    
