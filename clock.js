@@ -21,8 +21,11 @@ function preload(){
 
 function draw_clock(obj) { //obj
 
-  if(obj.hours >= 6 || obj.hours < 20 ) {  //The background is bright before 19 o'clock and dark after 19 o'clock
+  if(obj.hours <= 6 || obj.hours > 20 ) {  //The background is bright before 19 o'clock and dark after 19 o'clock
 
+  background(7, 34, 78); //dark blue
+  
+} else {  
   background(255); 
   let myStrokeWeight = 50;
   strokeWeight(myStrokeWeight)
@@ -36,8 +39,7 @@ function draw_clock(obj) { //obj
     line(i,0, i,height)
     
   }
-} else {
-  background(7, 34, 78); //dark blue
+
 }
 
   angleMode(RADIANS)
@@ -105,7 +107,7 @@ for (let i = 0; i < 12; i++) {   //loop
   }
   
   
-  if(obj.seconds_until_alarm < 0){
+  if(obj.seconds_until_alarm < 0 || obj.seconds_until_alarm == undefined ){
 
   draw_cloud(150, 100,obj)
   // fill(235, 247, 247.50)
@@ -114,7 +116,7 @@ for (let i = 0; i < 12; i++) {   //loop
   // ellipse(10, 20, 75, 50);
   }
 
-  else if(obj.seconds_until_alarm > 0){ // this is when the alarm is counting down 
+  else if(obj.seconds_until_alarm > 0 ){ // this is when the alarm is counting down 
    
     if(obj.millis < 999/2){
       sizeStep = 20;
@@ -137,7 +139,7 @@ for (let i = 0; i < 12; i++) {   //loop
 
     
 }
-  else{ // this will happen when obj.seconds_until_alarm  = 0 
+  else if (obj.seconds_until_alarm == 0){ // this will happen when obj.seconds_until_alarm  = 0 
     
     background(249, 99, 81, 150);
     fill(255); // white
